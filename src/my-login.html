@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-login">
+    <template>
+        <style>
+             :host {
+                display: block;
+                padding: 16px;
+            }
+
+            .infoData {
+                width: 300px;
+            }
+        </style>
+        <h1>LOGIN</h1>
+
+        <paper-input label="Username" class="infoData"></paper-input>
+        <paper-input label="Password" class="infoData"></paper-input>
+        <br/>
+        <paper-button raised>LOGIN</paper-button>
+
+    </template>
+    <script>
+        class Login extends Polymer.Element {
+            static get is() {
+                return 'my-login';
+            }
+        }
+        window.customElements.define(Login.is, Login);
+    </script>
+</dom-module>

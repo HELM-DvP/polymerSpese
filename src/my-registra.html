@@ -1,0 +1,58 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-registra">
+    <template>
+        <style>
+             :host {
+                display: block;
+                padding: 16px;
+            }
+
+            .infoData {
+                width: 300px;
+            }
+        </style>
+
+        <iron-ajax id="registrazione" method="post" url=" http://localhost:8080/Postit/resources/utenti/newAccount" handle-as="json" content-type="application/json" on-response="responseRegistra" on-error="errorRegistra"></iron-ajax>
+        <h1>REGISTRAZIONE</h1>
+        <paper-input label="Username" value="{{newUsr.user}}" class="infoData"></paper-input>
+        <paper-input type="password" label="Password" value="{{newUsr.pwd}}" class="infoData"></paper-input>
+        <paper-input label="Email" value="{{newUsr.mail}}" class="infoData"></paper-input>
+        <br/>
+        <paper-button raised on-tap="registrazione">REGISTRATI</paper-button>
+
+    </template>
+    <script>
+        class Registra extends Polymer.Element {
+            static get is() {
+                return 'my-registra';
+            }
+
+            constructor() {
+                super();
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+                this.newUsr = {};
+            }
+
+            registrazione() {
+                console.log("registrazione()");
+                this.newUsr = {
+                    "user": this.newUsr.user,
+                    "pwd": this.newUsr.pwd,
+                    "mail": this.newUsr.mail
+                }
+                console.log(this.newUsr);
+                this.$.registrazione.body = this.newUsr;
+                this.$.registrazione.generateRequest();
+            }
+        }
+        window.customElements.define(Registra.is, Registra);
+    </script>
+</dom-module>
